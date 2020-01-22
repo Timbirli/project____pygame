@@ -1,4 +1,4 @@
 import pygame
 
 pygame.init()
-pygame.close()
+pygame.quit()
