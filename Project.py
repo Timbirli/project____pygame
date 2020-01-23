@@ -3,7 +3,7 @@ import os
 import sys
 
 pygame.init()
-screen = pygame.display.set_mode((1920, 1080))
+screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 FPS = 60
 
@@ -26,7 +26,7 @@ def terminate():
 
 
 def start_screen():
-    fon = pygame.transform.scale(load_image('fon.jpg'), (1920, 1080))
+    fon = pygame.transform.scale(load_image('startscreen.jpg'), (1920, 1080))
     screen.blit(fon, (0, 0))
     while True:
         for event in pygame.event.get():
