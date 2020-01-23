@@ -47,8 +47,7 @@ def start_screen():
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEMOTION:
-                cur.rect.x = event.pos[0] - 50
-                cur.rect.y = event.pos[1] - 50
+                cur.rect.center = event.pos
             if event.type == pygame.MOUSEBUTTONDOWN and playbut.rect.collidepoint(event.pos):
                 pass
             if event.type == pygame.MOUSEBUTTONDOWN and exitbut.rect.collidepoint(event.pos):
