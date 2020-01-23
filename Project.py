@@ -6,6 +6,7 @@ pygame.init()
 screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 FPS = 60
+pygame.mouse.set_visible(0)
 
 
 def load_image(name):
@@ -20,10 +21,10 @@ def terminate():
 
 
 def start_screen():
+    fon = pygame.transform.scale(load_image('startscreen.jpg'), (1920, 1080))
     play_sprites = pygame.sprite.Group()
     exit_sprites = pygame.sprite.Group()
-    fon = pygame.transform.scale(load_image('startscreen.jpg'), (1920, 1080))
-    screen.blit(fon, (0, 0))
+    cur_sprites = pygame.sprite.Group()
     playbut = pygame.sprite.Sprite()
     playbut.image = load_image('play.png')
     playbut.rect = playbut.image.get_rect()
@@ -36,18 +37,27 @@ def start_screen():
     exitbut.rect.x = 650
     exitbut.rect.y = 700
     exit_sprites.add(exitbut)
+    cur = pygame.sprite.Sprite()
+    cur.image = load_image("cross.png")
+    cur.rect = cur.image.get_rect()
+    cur_sprites.add(cur)
     while True:
+        screen.blit(fon, (0, 0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
+            if event.type == pygame.MOUSEMOTION:
+                cur.rect.x = event.pos[0] - 50
+                cur.rect.y = event.pos[1] - 50
             if event.type == pygame.MOUSEBUTTONDOWN and playbut.rect.collidepoint(event.pos):
                 pass
             if event.type == pygame.MOUSEBUTTONDOWN and exitbut.rect.collidepoint(event.pos):
                 terminate()
         play_sprites.draw(screen)
         exit_sprites.draw(screen)
-        pygame.display.flip()
+        cur_sprites.draw(screen)
         clock.tick(FPS)
+        pygame.display.flip()
 
 
 start_screen()
